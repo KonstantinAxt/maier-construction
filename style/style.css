@@ -3906,22 +3906,51 @@ body.has-theme-bar #theme-bar {
   background-color: var(--slate-100);
   max-width: 72em;
   margin: auto;
-  padding-bottom: 6em;
+  padding: 1em 2em 6em;
+}
+
+.slider .swiper-container {
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(20, 24, 27, 0.06), 0 8px 24px -12px rgba(20, 24, 27, 0.18);
+  width: 100%;
 }
 
 .slider .swiper-button-next,
-.slider .swiper-button-prev,
+.slider .swiper-button-prev {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(20, 24, 27, 0.2);
+  color: var(--slate-900);
+  height: 44px;
+  margin-top: -22px;
+  width: 44px;
+}
+
+.slider .swiper-button-next:after,
+.slider .swiper-button-prev:after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.slider .swiper-button-prev {
+  left: 1em;
+}
+
+.slider .swiper-button-next {
+  right: 1em;
+}
+
 .slider .swiper-pagination-bullet {
-  color: #4C4C4C;
+  background: #FFFFFF;
+  height: 8px;
+  opacity: 0.6;
+  transition: opacity 150ms ease, background-color 150ms ease;
+  width: 8px;
 }
 
 .slider .swiper-pagination-bullet-active {
   background: var(--copper);
-}
-
-.slider .swiper-container {
-  width: 100%;
-  height: 100%;
+  opacity: 1;
 }
 
 .slider .swiper-slide {
@@ -3941,7 +3970,10 @@ body.has-theme-bar #theme-bar {
 }
 
 .slider .swiper-slide-img {
+  aspect-ratio: 16 / 9;
   display: block;
+  height: auto;
+  object-fit: cover;
   width: 100%;
 }
 
@@ -4292,6 +4324,15 @@ header.major h1:after, header.major h2:after, header.major h3:after,
   .spotlights > section:hover .image.fit img {
     transform: scale(1.03);
   }
+
+  .slider .swiper-button-next:hover,
+  .slider .swiper-button-prev:hover {
+    color: var(--copper);
+  }
+
+  .slider .swiper-pagination-bullet:hover {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4327,5 +4368,14 @@ header.major h1:after, header.major h2:after, header.major h3:after,
   .spotlights > section:nth-child(odd) {
     padding: 2em 1.25em 0.75em;
     width: 100%;
+  }
+
+  .slider {
+    padding: 0 1em 2em;
+  }
+
+  .slider .swiper-button-next,
+  .slider .swiper-button-prev {
+    display: none;
   }
 }
