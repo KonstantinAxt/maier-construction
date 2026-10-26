@@ -4038,12 +4038,10 @@ body.has-theme-bar #theme-bar {
 .hero-img {
   display: block;
   position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  left: 50%;
-  top: 0;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  height: 100%;
+  object-fit: cover;
 }
 
 #banner .major {
@@ -4054,20 +4052,10 @@ body.has-theme-bar #theme-bar {
   #banner {
     box-sizing: border-box;
     overflow: hidden;
-    min-height: 700px;
   }
 }
 
 @media screen and (max-width: 1280px) {
-  .hero-img {
-    width: 100%;
-    height: auto;
-  }
-
-  #banner {
-    min-height: 488px;
-  }
-
   .slider {
     padding-bottom: 2em;
   }
@@ -4079,11 +4067,6 @@ body.has-theme-bar #theme-bar {
 }
 
 @media screen and (max-width: 980px) {
-  .hero-img {
-    width: auto;
-    height: 100%;
-  }
-
   .slider {
     padding: 2em;
   }
@@ -4211,6 +4194,12 @@ header.major h1:after, header.major h2:after, header.major h3:after,
   inset: 0;
   pointer-events: none;
   position: absolute;
+}
+
+#banner {
+  aspect-ratio: 16 / 9;
+  min-height: auto;
+  overflow: clip;
 }
 
 #banner .logo {
