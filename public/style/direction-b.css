@@ -1,0 +1,110 @@
+@layer direction {
+  [data-v='b'] {
+    /* Type */
+    --font: Geist, sans-serif;
+    /* Color */
+    --bg: oklch(0.16 0.012 95);
+    --surface: oklch(0.25 0 0);
+    --surface-2: oklch(0.29 0 0);
+    --text: oklch(0.95 0.008 80);
+    --muted: oklch(0.71 0.012 75);
+    --accent: oklch(0.65 0.13 55);
+    --accent-ink: oklch(0.16 0.012 95);
+    --line: oklch(0.34 0 0);
+    --hero-grad: linear-gradient(90deg, oklch(1 0 none), oklch(0.72 0 0));
+    --nav: oklch(0.24 0 0 / 0.78);
+  }
+
+  [data-v='b'] .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100svh;
+    padding-block-end: var(--space-b-hero-bottom);
+  }
+
+  [data-v='b'] .hero-photo-full {
+    position: absolute;
+    inset: 0;
+  }
+
+  [data-v='b'] .hero-photo-full img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  [data-v='b'] .hero-photo-full::after {
+    position: absolute;
+    inset: 0;
+    background: oklch(0.16 0.012 95 / 0.68);
+    content: '';
+  }
+
+  [data-v='b'] .hero .wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  [data-v='b'] .hero .sub {
+    color: oklch(0.85 0.012 75);
+  }
+
+  [data-v='b'] .hero-media,
+  [data-v='b'] .hero-strip,
+  [data-v='b'] .call-big {
+    display: none;
+  }
+
+  [data-v='b'] .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  [data-v='b'] .card {
+    flex-direction: row;
+    gap: var(--space-4);
+  }
+
+  [data-v='b'] .card > img {
+    width: 44%;
+    aspect-ratio: 1;
+  }
+
+  [data-v='b'] .expert-band {
+    background: oklch(0.2 0 0);
+  }
+
+  [data-v='b'] .gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    grid-auto-rows: auto;
+  }
+
+  [data-v='b'] .gallery img {
+    flex: 0 0 min(27.5rem, 80%);
+    block-size: var(--space-gallery-card);
+    scroll-snap-align: start;
+  }
+
+  @media (max-width: 960px) {
+    [data-v='b'] .services {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    [data-v='b'] .card {
+      flex-direction: column;
+    }
+
+    [data-v='b'] .card > img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    [data-v='b'] .gallery img:nth-child(6) {
+      display: block;
+    }
+  }
+}
