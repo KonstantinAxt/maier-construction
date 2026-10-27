@@ -6,14 +6,13 @@ The static site for Oliver Maier in Landshut. Netlify serves `public/` exactly a
 
 ```sh
 npm install        # once; installs playwright-core, which is only used for screenshots
-$EDITOR content/de/site.json    # every text on the landing page, contact details, direction labels
+$EDITOR content/de/site.json    # landing page copy, request page copy and contact details
 $EDITOR content/de/legal.json   # Impressum, Haftung, Datenschutz
-npm run build      # writes public/index.html and public/imprint.html
+npm run build      # writes public/index.html, public/imprint.html and public/gutachten-anfragen.html
 npm run serve      # preview on http://127.0.0.1:8080
-npm run shots      # screenshots of both pages in every direction into spad/after/
+npm run shots      # screenshots of all pages in every direction into spad/after/
 ```
-
-Commit `content/` and the generated `public/*.html` together. Never edit the generated HTML by hand.
+Commit `content/` and the generated `public/*.html` files together. Never edit generated HTML by hand.
 
 ## Layout
 
@@ -24,6 +23,10 @@ Commit `content/` and the generated `public/*.html` together. Never edit the gen
 | `public/style/base.css` | Shared reset, tokens, layout and components in `@layer reset, tokens, layout, components, direction` |
 | `public/style/direction-{a,b,c}.css` | One design direction each, scoped to `[data-v="x"]` |
 | `public/js/site.js` | Direction switcher, mobile menu, reveal effects |
+
+## Gutachten anfragen
+
+The guided request page builds one structured plain text message in the browser. With photos and Web Share support, it opens the system share sheet with the photos and message; otherwise it opens a `mailto:` link and photos must be attached manually. Form data is not uploaded or stored, and the visitor sends the message from their own mail app.
 
 ## Design directions
 
