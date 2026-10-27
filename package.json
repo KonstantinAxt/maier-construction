@@ -1,0 +1,17 @@
+{
+  "name": "maier-construction",
+  "private": true,
+  "type": "module",
+  "description": "Static site for Oliver Maier, Dachgutachter und Spenglermeister in Landshut. Netlify serves public/ without building.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build/build.mjs",
+    "serve": "node build/serve.mjs",
+    "shots": "node build/shots.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.64.1"
+  }
+}
