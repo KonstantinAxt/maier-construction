@@ -23,7 +23,7 @@
     display: grid;
     grid-template-columns: 1.05fr 1fr;
     align-items: center;
-    gap: var(--space-10);
+    gap: var(--space-9);
   }
 
   [data-v='a'] .hero-media {

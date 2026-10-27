@@ -50,7 +50,7 @@
   [data-v='c'] .hero-strip img {
     inline-size: 100%;
     aspect-ratio: 3 / 4;
-    border-radius: var(--radius-feature);
+    border-radius: var(--radius-card);
     object-fit: cover;
   }
 
