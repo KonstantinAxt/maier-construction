@@ -8,15 +8,17 @@ function setDirection(direction, updateHistory = true) {
   if (!validDirections.has(direction)) return;
   document.documentElement.dataset.v = direction;
   directions.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.set === direction)));
+  // Netlify rewrites imprint.html to /imprint, so match by origin instead of href text.
+  document.querySelectorAll('a[href]:not([href^="#"])').forEach(anchor => {
+    const target = new URL(anchor.getAttribute('href'), location.href);
+    if (target.origin !== location.origin) return;
+    target.searchParams.set('v', direction);
+    anchor.href = `${target.pathname}${target.search}${target.hash}`;
+  });
   if (!updateHistory) return;
   const url = new URL(location.href);
   url.searchParams.set('v', direction);
   history.replaceState(null, '', url);
-  document.querySelectorAll('a[href^="index.html"], a[href^="imprint.html"]').forEach(anchor => {
-    const target = new URL(anchor.getAttribute('href'), location.href);
-    target.searchParams.set('v', direction);
-    anchor.href = `${target.pathname.split('/').pop()}${target.search}${target.hash}`;
-  });
 }
 directions.forEach(button => button.addEventListener('click', () => setDirection(button.dataset.set)));
 const navigation = document.querySelector('.nav-shell');
