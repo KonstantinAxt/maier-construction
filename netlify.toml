@@ -1,0 +1,6 @@
+# Netlify only serves the committed files in public/. It never builds.
+# public/ has no package.json, so Netlify also skips its automatic npm install.
+# Regenerate pages locally with `npm run build` and commit the result.
+[build]
+  base = "public"
+  publish = "."
