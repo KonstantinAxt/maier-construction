@@ -142,6 +142,67 @@
       "mail": { "label": "Mail", "address": "oliver.maier@vodafone.de", "subject": "Gutachtenanfrage" },
       "address": { "label": "Adresse", "display": "Paul Heyse Straße 10, 84032 Landshut", "legalDisplay": "Paul-Heyse-Str. 10" }
     },
+    "request": {
+      "title": "Gutachten anfragen",
+      "description": "Schildern Sie Ihr Anliegen für eine unverbindliche erste Einschätzung. Ihre Angaben bleiben im Browser, bis Sie selbst eine Mail erstellen.",
+      "eyebrow": "Gutachten anfragen",
+      "heading": "Was ist an Ihrem Dach los?",
+      "intro": "Mit ein paar Angaben kann Oliver Maier Ihr Anliegen besser einordnen und sich bei Ihnen melden.",
+      "progress": "Schritt {n} von {total}",
+      "steps": [
+        { "legend": "Worum geht es?", "fields": [
+          { "name": "anlass", "label": "Anlass", "type": "radio", "required": true, "options": ["Undichtigkeit oder Feuchte", "Sturm, Hagel oder Schnee", "Mangel oder Streit mit einem Betrieb", "Dachcheck vor dem Kauf", "Baubegleitung oder Abnahme", "Beweissicherung", "Weiß ich noch nicht"] },
+          { "name": "schilderung", "label": "Schilderung", "type": "textarea", "required": true, "maxlength": 1500, "hint": "Was ist passiert, seit wann, wo am Dach?" }
+        ] },
+        { "legend": "Gebäude", "fields": [
+          { "name": "gebaeudetyp", "label": "Gebäudetyp", "type": "radio", "required": true, "options": ["Einfamilienhaus", "Doppel oder Reihenhaus", "Mehrfamilienhaus", "Gewerbe oder Halle", "Sonstiges"] },
+          { "name": "plz", "label": "PLZ", "type": "text", "required": true, "inputmode": "numeric", "autocomplete": "postal-code", "pattern": "[0-9]{5}" },
+          { "name": "ort", "label": "Ort", "type": "text", "required": true, "autocomplete": "address-level2" },
+          { "name": "strasse", "label": "Straße und Hausnummer", "type": "text", "autocomplete": "street-address" },
+          { "name": "baujahr", "label": "Baujahr ungefähr", "type": "text", "inputmode": "numeric" }
+        ] },
+        { "legend": "Zeitrahmen", "fields": [
+          { "name": "frist", "label": "Gibt es eine Frist?", "type": "radio", "options": ["Nein", "Ja"], "yesValue": "Ja" },
+          { "name": "fristdatum", "label": "Datum", "type": "date", "requiredWhen": { "name": "frist", "value": "Ja" } },
+          { "name": "fristgrund", "label": "Grund", "type": "select", "options": ["Notartermin", "Abnahme", "Versicherung", "Gericht", "Sonstiges"], "requiredWhen": { "name": "frist", "value": "Ja" } },
+          { "name": "rueckruf", "label": "Rückruf am besten", "type": "radio", "options": ["Vormittags", "Nachmittags", "Abends", "Egal"] }
+        ] },
+        { "legend": "Kontakt", "fields": [
+          { "name": "name", "label": "Name", "type": "text", "required": true, "autocomplete": "name" },
+          { "name": "telefon", "label": "Telefon", "type": "tel", "autocomplete": "tel" },
+          { "name": "mail", "label": "Mail", "type": "email", "autocomplete": "email" },
+          { "name": "rolle", "label": "Sie sind", "type": "radio", "options": ["Eigentümer", "Käufer", "Hausverwaltung", "Versicherung", "Anwalt oder Gericht", "Sonstiges"] }
+        ] },
+        { "legend": "Fotos", "fields": [
+          { "name": "fotos", "label": "Fotos vom Dach", "type": "file", "hint": "Bis zu fünf Bilder. Sie bleiben in Ihrem Browser und werden nicht hochgeladen. Wenn Ihr Mailprogramm sie nicht übernehmen kann, hängen Sie sie dort selbst an." }
+        ] },
+        { "legend": "Prüfen", "fields": [] }
+      ],
+      "errors": {
+        "summary": "Bitte prüfen Sie die markierten Angaben.",
+        "required": "Bitte füllen Sie dieses Feld aus.",
+        "choice": "Bitte wählen Sie eine Option.",
+        "postal": "Bitte geben Sie eine fünfstellige PLZ ein.",
+        "email": "Bitte geben Sie eine gültige Mailadresse ein.",
+        "contact": "Bitte geben Sie eine Telefonnummer oder Mailadresse an.",
+        "files": "Bitte wählen Sie höchstens fünf Bilder aus."
+      },
+      "buttons": { "next": "Weiter", "back": "Zurück", "review": "Prüfen", "edit": "Ändern", "send": "Mail erstellen", "share": "Teilen und Mail erstellen", "copy": "Text kopieren", "copyAddress": "Adresse kopieren", "removePhoto": "Entfernen" },
+      "reviewHeading": "Ihre Angaben",
+      "firstAssessment": "Die erste Einschätzung ist unverbindlich.",
+      "privacy": "Ihre Angaben werden nicht an unseren Server gesendet. Sie bleiben in Ihrem Browser, bis Sie selbst eine Mail erstellen. Mehr dazu im",
+      "photoHint": "Fotos bleiben auf Ihrem Gerät und werden nicht hochgeladen.",
+      "recipientLabel": "Empfängeradresse",
+      "sendHint": "Die Mail wird in Ihrem Mailprogramm geöffnet. Prüfen Sie den Text und senden Sie die Mail selbst ab. Wenn Fotos ausgewählt wurden, hängen Sie sie dort an, falls sie nicht übernommen werden.",
+      "fallbackHeading": "Ihre Anfrage",
+      "fallbackText": "Kopieren Sie den Text und fügen Sie ihn in eine Mail ein. Hängen Sie Ihre Fotos dort an.",
+      "copied": "Text kopiert.",
+      "addressCopied": "Adresse kopiert.",
+      "subject": "Gutachtenanfrage: {anlass}, {plz} {ort}",
+      "introLine": "Gutachtenanfrage über die Webseite",
+      "sections": ["ANLIEGEN", "GEBÄUDE", "ZEITRAHMEN", "KONTAKT", "FOTOS"],
+      "labels": { "occasion": "Anlass", "description": "Schilderung", "buildingType": "Gebäudetyp", "address": "Adresse", "street": "Straße und Hausnummer", "year": "Baujahr", "deadline": "Frist", "callback": "Rückruf", "name": "Name", "phone": "Telefon", "email": "Mail", "role": "Sie sind", "photos": "Fotos", "attached": "Fotos angehängt", "none": "Keine Fotos", "manual": "Bitte hängen Sie Ihre Fotos in dieser Mail an", "recipient": "An: {address}", "recipientName": "Oliver Maier" }
+    },
     "footer": {
       "copyright": "© Oliver Maier, Spenglermeister und Dachgutachter",
       "imprint": "Impressum",

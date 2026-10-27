@@ -7,8 +7,8 @@ import { startServer } from './serve.mjs';
 import { loadContent } from './build.mjs';
 
 const outDir = process.argv[2] ?? 'spad/after';
-const pages = ['index', 'imprint'];
-const viewports = { desktop: { width: 1440, height: 900 }, mobile: { width: 390, height: 844 } };
+const pages = ['index', 'imprint', 'gutachten-anfragen'];
+const viewports = { desktop: { width: 1440, height: 900 }, mobile: { width: 402, height: 844 } };
 const { site } = await loadContent();
 const directions = site.directions.map(d => d.id);
 

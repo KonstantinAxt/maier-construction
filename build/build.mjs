@@ -1,6 +1,6 @@
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { renderImprint, renderIndex } from './render.mjs';
+import { renderImprint, renderIndex, renderRequest } from './render.mjs';
 
 const root = new URL('../', import.meta.url);
 const readJson = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
@@ -32,6 +32,9 @@ async function validate({ site }) {
       throw new Error(`Direction "${direction.id}" requires a hero.media slot.`);
     }
   }
+  if (!site.request || !Array.isArray(site.request.steps) || site.request.steps.length !== 6) {
+    throw new Error('site.request must define six steps.');
+  }
 }
 
 async function main() {
@@ -39,7 +42,8 @@ async function main() {
   await validate(content);
   await Promise.all([
     writeFile(new URL('public/index.html', root), renderIndex(content)),
-    writeFile(new URL('public/imprint.html', root), renderImprint(content))
+    writeFile(new URL('public/imprint.html', root), renderImprint(content)),
+    writeFile(new URL('public/gutachten-anfragen.html', root), renderRequest(content))
   ]);
 }
 
