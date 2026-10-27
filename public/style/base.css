@@ -986,7 +986,7 @@
     .btn,
     .switch button,
     .menu-btn {
-      transition: transform 300ms var(--ease), opacity 300ms var(--ease);
+      transition: transform 160ms var(--ease), opacity 160ms var(--ease);
     }
 
     .nav ul a {
@@ -1015,6 +1015,21 @@
 
     html.js .tagline .w {
       transition: opacity 500ms var(--ease);
+    }
+    .request-choice label {
+      transition: border-color 150ms ease-out, background-color 150ms ease-out;
+    }
+
+    .request-step:not([hidden]),
+    .request-review:not([hidden]),
+    .request-fallback:not([hidden]) {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+      @starting-style {
+        opacity: 0;
+        transform: translateY(4px);
+      }
     }
   }
 
@@ -1165,39 +1180,19 @@
     font-size: var(--text-card-title);
     font-weight: 650;
   }
-  .request-choice {
+  .request-choice,
+  .request-field {
+    display: grid;
+    gap: var(--space-2);
     min-inline-size: 0;
+    margin-block: var(--space-4);
+  }
+  .request-choice {
     padding: 0;
     border: 0;
   }
-  .request-choice > legend {
-    padding: 0;
-    font-weight: 600;
-  }
-
-  .request-control-end { display: flex; justify-content: flex-end; gap: var(--space-3); }
-  .request-choice input[type="radio"],
-  .request-choice input[type="checkbox"] { accent-color: var(--accent); color-scheme: light dark; }
-  .request-page :focus:not(:focus-visible) { outline: 2px solid transparent; }
-  .request-field,
-  .request-choice {
-    display: grid;
-    gap: var(--space-2);
-    min-inline-size: 0;
-    margin-block: var(--space-4);
-  }
-  .request-choice {
-    display: grid;
-    gap: var(--space-2);
-    min-inline-size: 0;
-    margin-block: var(--space-4);
-  }
-
-  .request-field > span:first-child,
-  .request-choice > legend {
-    font-weight: 600;
-  }
-
+  .request-choice > legend { padding: 0; font-weight: 600; }
+  .request-field > span:first-child { font-weight: 600; }
   .request-field input:not([type="file"]),
   .request-field select,
   .request-field textarea,
@@ -1244,21 +1239,12 @@
     cursor: pointer;
   }
 
-  .request-choice input {
-    flex: none;
-    margin-block-start: 0.25em;
-    accent-color: var(--accent);
-  }
-
   .request-hint { color: var(--muted); line-height: var(--leading-body); }
   .request-send > p { color: var(--muted); line-height: var(--leading-body); margin-block: var(--space-3); }
-  .request-controls { justify-content: space-between; margin-block-start: var(--space-5); }
-  .request-choice > legend { grid-row: 1; }
   .request-field > .request-hint { grid-row: 2; margin-block-start: calc(-1 * var(--space-2)); }
   .request-field > input,
   .request-field > textarea,
   .request-field > select { grid-row: 3; }
-  .request-review + .request-controls { margin-block-start: var(--space-5); }
   .request-intro {
     color: var(--muted);
     line-height: var(--leading-body);
@@ -1267,19 +1253,37 @@
   .request-error {
     min-block-size: 0;
     margin: 0;
-    color: var(--text);
+    color: var(--danger);
     font-size: var(--text-sm);
     font-weight: 650;
   }
 
   .request-error:empty { display: none; }
-  .request-field [aria-invalid="true"],
-  .request-choice:has([aria-invalid="true"]) label { border-color: var(--accent); }
+  .request-error:not(:empty)::before {
+    display: inline-block;
+    inline-size: 1em;
+    block-size: 1em;
+    margin-inline-end: 0.35em;
+    background: currentColor;
+    content: '';
+    vertical-align: -0.15em;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23000' d='M128 24a104 104 0 1 0 104 104A104.12 104.12 0 0 0 128 24Zm0 160a12 12 0 1 1 12-12 12 12 0 0 1-12 12Zm8-48h-16V72h16Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .request-field input[aria-invalid="true"],
+  .request-field select[aria-invalid="true"],
+  .request-field textarea[aria-invalid="true"] { border-color: var(--danger); }
+  .request-choice label:has(:checked) {
+    border-color: var(--accent);
+    background: color-mix(in oklch, var(--accent) 10%, var(--surface));
+  }
+  .request-choice:has([aria-invalid="true"]) label,
+  .request-choice:has([aria-invalid="true"]) label:has(:checked),
+  .request-choice:has([aria-invalid="true"]) label:hover { border-color: var(--danger); }
 
   .request-alert {
     margin-block-end: var(--space-5);
     padding: var(--space-4);
-    border-inline-start: 0.25rem solid var(--accent);
+    border-inline-start: 0.25rem solid var(--danger);
     background: var(--surface-2);
   }
 
@@ -1288,7 +1292,6 @@
   .request-controls,
   .request-recipient,
   .request-summary-group > h3 { display: flex; align-items: center; gap: var(--space-3); }
-  .request-controls { justify-content: space-between; margin-block-start: var(--space-5); }
   .request-back,
   .request-copy-address,
   .request-edit,
@@ -1301,16 +1304,12 @@
   .request-summary-group dd { margin: 0; overflow-wrap: anywhere; }
   .request-recipient { flex-wrap: wrap; }
   .request-send { margin-block-start: var(--space-5); padding-block-start: var(--space-4); border-block-start: var(--size-hairline) solid var(--line); }
-  .request-send > p { margin-block: var(--space-3); }
   .request-fallback textarea { display: block; margin-block: var(--space-4); overflow-wrap: anywhere; }
   .request-fallback p { overflow-wrap: anywhere; }
   .request-fallback-recipient { margin-block-start: var(--space-5); }
   .request-mailto { position: absolute; inline-size: 1px; block-size: 1px; overflow: clip; clip-path: inset(50%); }
+  .request-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-block-start: var(--space-5); }
 
-  .request-page input[type="radio"],
-  .request-page input[type="checkbox"] { accent-color: var(--accent); color-scheme: light dark; }
-  .request-controls { display: flex; align-items: center; justify-content: space-between; margin-block-start: var(--space-5); }
-  .request-control-end { display: flex; justify-content: flex-end; gap: var(--space-3); }
   .request-controls [data-back] { margin-inline-end: auto; }
   .request-page button:focus-visible,
   .request-page input:focus-visible,
@@ -1326,7 +1325,10 @@
 
   .request-page button:active { transform: scale(0.97); }
   @media (hover: hover) and (pointer: fine) {
-    .request-choice label:hover { border-color: var(--accent); }
+    .request-choice label:hover { border-color: color-mix(in oklch, var(--accent) 50%, var(--line)); }
+    .request-choice:has(:not([aria-invalid="true"])) label:has(:checked):hover { border-color: var(--accent); }
+    .request-choice:has([aria-invalid="true"]) label:hover,
+    .request-choice:has([aria-invalid="true"]) label:has(:checked):hover { border-color: var(--danger); }
   }
 
   @media (max-width: 720px) {

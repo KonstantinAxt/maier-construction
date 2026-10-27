@@ -1,5 +1,6 @@
 @layer direction {
   [data-v='b'] {
+    color-scheme: dark;
     /* Type */
     --font: Geist, sans-serif;
     /* Color */
@@ -10,6 +11,7 @@
     --muted: oklch(0.71 0.012 75);
     --accent: oklch(0.65 0.13 55);
     --accent-ink: oklch(0.16 0.012 95);
+    --danger: oklch(0.7 0.16 28);
     --line: oklch(0.34 0 0);
     --hero-grad: linear-gradient(90deg, oklch(1 0 none), oklch(0.72 0 0));
     --nav: oklch(0.24 0 0 / 0.78);

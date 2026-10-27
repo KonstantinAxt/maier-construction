@@ -1,5 +1,6 @@
 @layer direction {
   [data-v='a'] {
+    color-scheme: light;
     /* Type */
     --font: Manrope, sans-serif;
     /* Color */
@@ -10,6 +11,7 @@
     --muted: oklch(0.47 0.015 65);
     --accent: oklch(0.51 0.12 48);
     --accent-ink: oklch(1 0 none);
+    --danger: oklch(0.5 0.17 28);
     --line: oklch(0.87 0.015 75);
     --hero-grad: linear-gradient(90deg, oklch(0 0 none), oklch(0.44 0 none));
     --nav: oklch(1 0 none / 0.78);

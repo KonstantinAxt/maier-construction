@@ -143,11 +143,11 @@ function imprintBody(site, legal) {
 }
 function requestField(field, request) {
   const attrs = [`name="${esc(field.name)}"`, `id="${esc(field.name)}"`, `data-field="${esc(field.name)}"`, field.required ? 'required' : '', field.maxlength ? `maxlength="${field.maxlength}"` : '', field.inputmode ? `inputmode="${esc(field.inputmode)}"` : '', field.autocomplete ? `autocomplete="${esc(field.autocomplete)}"` : '', field.pattern ? `pattern="${esc(field.pattern)}"` : ''].filter(Boolean).join(' ');
-  if (field.type === 'radio') return `<fieldset class="request-choice" id="${esc(field.name)}" data-control="${esc(field.name)}"><legend>${esc(field.label)}</legend><div>${field.options.map((option, index) => `<label><input type="radio" name="${esc(field.name)}" value="${esc(option)}"${index === 0 && field.required ? ' required' : ''}${index === 0 ? ` id="${esc(field.name)}"` : ''}><span>${esc(option)}</span></label>`).join('')}</div><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></fieldset>`;
-  if (field.type === 'select') return `<label class="request-field" id="${esc(field.name)}" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}<select ${attrs}${field.hint ? ` aria-describedby="hint-${esc(field.name)}"` : ''}><option value=""></option>${field.options.map(option => `<option>${esc(option)}</option>`).join('')}</select><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
-  if (field.type === 'file') return `<label class="request-field" id="${esc(field.name)}" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}<input ${attrs} type="file" accept="image/*" multiple${field.hint ? ` aria-describedby="hint-${esc(field.name)}"` : ''}><ul class="request-files" data-files></ul><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
+  if (field.type === 'radio') return `<fieldset class="request-choice" data-control="${esc(field.name)}"><legend>${esc(field.label)}</legend><div>${field.options.map((option, index) => `<label><input type="radio" name="${esc(field.name)}" value="${esc(option)}"${index === 0 && field.required ? ' required' : ''}${index === 0 ? ` id="${esc(field.name)}"` : ''}><span>${esc(option)}</span></label>`).join('')}</div><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></fieldset>`;
+  if (field.type === 'select') return `<label class="request-field" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}<select ${attrs}${field.hint ? ` aria-describedby="hint-${esc(field.name)}"` : ''}><option value=""></option>${field.options.map(option => `<option>${esc(option)}</option>`).join('')}</select><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
+  if (field.type === 'file') return `<label class="request-field" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}<input ${attrs} type="file" accept="image/*" multiple${field.hint ? ` aria-describedby="hint-${esc(field.name)}"` : ''}><ul class="request-files" data-files></ul><p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
   const control = field.type === 'textarea' ? `<textarea ${attrs}${field.hint ? ` aria-describedby="hint-${esc(field.name)}"` : ''}></textarea>` : `<input ${attrs} type="${esc(field.type)}">`;
-  return `<label class="request-field" id="${esc(field.name)}" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}${control}<p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
+  return `<label class="request-field" data-control="${esc(field.name)}"><span>${esc(field.label)}</span>${field.hint ? `<span class="request-hint" id="hint-${esc(field.name)}">${esc(field.hint)}</span>` : ''}${control}<p class="request-error" id="error-${esc(field.name)}" data-error="${esc(field.name)}"></p></label>`;
 }
 
 export function renderRequest(content) {
@@ -185,8 +185,7 @@ ${site.directions.map(({ id }) => `<link rel="stylesheet" href="style/direction-
 <a class="skip" href="#inhalt">${esc(site.labels.skip)}</a>
 ${navigation(site, page)}
 ${main}
-${footer(site)}
-<a class="callbar" href="tel:${esc(tel(site.contact.mobile.number))}">${icon('phone')} ${esc(site.labels.nowCall)}</a>
+${footer(site)}${isRequest ? '' : `\n<a class="callbar" href="tel:${esc(tel(site.contact.mobile.number))}">${icon('phone')} ${esc(site.labels.nowCall)}</a>`}
 ${switcher(site)}
 <script src="js/site.js" defer></script>
 </body>
